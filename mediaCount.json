@@ -1,0 +1,7 @@
+{ BOOK: 7,
+  EBOOK: 5,
+  VIDEODISC: 3,
+  AUDIOBOOK: 1,
+  SOUNDDISC: 3,
+  SONG: 2,
+  VIDEO: 1 }
