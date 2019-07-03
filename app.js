@@ -3,14 +3,7 @@ const fs = require('fs');
 
 let t0 = new Date().getTime();
 let line_no = 0;
-let mediaCount = {
-  'BOOK': 0,
-  'EBOOK': 0,
-  'AUDIOBOOK': 0,
-  'VIDEODISC': 0,
-  'SOUNDDISC': 0,
-  'SONG': 0
-}
+let mediaCount = {}
 
 // create instance of readline
 // each instance is associated with single input stream
@@ -22,11 +15,14 @@ let rl = readline.createInterface({
 
 //Counts occurences of an object's keys inside an array and stores them to the corresponding key;
 let countOccurences = (arr, countObj) => {
-  arr.forEach((el) => {
-    if (countObj.hasOwnProperty(el)) {
-      countObj[el]++;
-    }
-  })
+
+  mediaName = arr[2].replace(/("|')/g, "");
+
+  if (countObj.hasOwnProperty(mediaName)) {
+    countObj[mediaName]++;
+  } else {
+    countObj[mediaName] = 1;
+  }
 }
 
 
@@ -39,15 +35,28 @@ rl.on('line', function (line) {
   countOccurences(arr, mediaCount);
 });
 
-// end
-rl.on('close', function (line) {
-  console.log('Total lines : ' + line_no);
 
-  //List mediaCount object when file is done reading
-  console.log(mediaCount);
+// End
+rl.on('close', 
+  function (line) {
+    
 
-  let t1 = new Date().getTime();
-  //Display duration:
-  console.log(`Reading process took ${(t1- t0)} ms`);
-});
+    //list mediaCount object when file is done reading
+    //console.log(mediaCount);
+
+    let t1 = new Date().getTime();
+    //display duration:
+    console.log(`PROCESS DURATION: ${(t1-t0) / 1000} s `);
+
+    // let mediaTotal = 0;
+    for (let key in mediaCount) {
+      console.log(`${key}: ${mediaCount[key]}`);
+      mediaTotal += mediaCount[key];
+    }
+
+    console.log(`Lines total : ${line_no}`);
+    console.log(`Media total: ${mediaTotal}`);
+    
+  }
+);
 
