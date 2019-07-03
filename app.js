@@ -20,10 +20,11 @@ let countOccurences = (arr, countObj) => {
   mediaName = arr[2].replace(/("|')/g, "");
 
   // Dynamically fill the countObj with keys as we find them
-  //if the key exists, we increment it
   if (countObj.hasOwnProperty(mediaName)) {
+    //if the key exists, we increment it
     countObj[mediaName]++;
-  } else { //otherwise we add the new key to the obj with value 1
+  } else { 
+    //otherwise we add the new key to the obj with value 1
     countObj[mediaName] = 1;
   }
 }
@@ -46,7 +47,7 @@ rl.on('line', function (line) {
 
 
 
-// Event for end of file
+// End of read stream event
 rl.on('close', 
   function (line) {
     
